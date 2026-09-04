@@ -120,11 +120,11 @@ jobs:
           sudo mv kustomize /usr/local/bin/
 
       - name: Update image tag
-        working-directory: setup/k8s
+        working-directory: starter/frontend/k8s
         run: |
           kustomize edit set image frontend="${{ secrets.ECR_REGISTRY }}/frontend:${{ github.sha }}"
 
       - name: Deploy to Kubernetes
-        working-directory: setup/k8s
+        working-directory: starter/frontend/k8s
         run: |
           kustomize build . | kubectl apply -f -
